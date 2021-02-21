@@ -106,10 +106,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               @foreach ($masuk as $item)
               <tr>
                 <th scope="row">{{$item->id}}</th>
-                <td>{!!substr($item['AlamatPengirim'],0, 20)!!}</td>
+                <td class="w-25">{{$item->AlamatPengirim}}</td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->NomorSurat}}</td>
-                <td>{!!substr($item['Perihal'], 0, 20)!!}</td>
+                <td class="w-25">{{$item->Perihal}}</td>
                 <td>
                   <a href="{{route ('masukedit',[$item->id])}}">
                     <img src="https://img.icons8.com/fluent-systems-filled/24/000000/edit-property.png">
