@@ -11,22 +11,12 @@ class SuratKeluarController extends Controller
     
     public function index()
     {
-        $keluar=SuratKeluar::all();
-        return view('admin/suratkeluar', compact('keluar'));
-    }
-
-    public function carikel(Request $request)
-    {
-        $carikel = $request->input('carikel');
-
-        $keluar = DB::table('suratkeluar')->select()
-            ->where('AlamatPenerima', 'LIKE', '%'.$carikel.'%')
-            ->orwhere('NomorSurat', 'LIKE', '%'.$carikel.'%')
-            ->orwhere('Perihal', 'LIKE', '%'.$carikel.'%')
-            ->get();
+        // pagination
+        $keluar=SuratKeluar::paginate(2);
 
         return view('admin/suratkeluar', compact('keluar'));
     }
+
     public function create()
     {
         //
@@ -36,8 +26,18 @@ class SuratKeluarController extends Controller
     public function store(Request $request)
     {
         //
-        $keluar=new SuratKeluar;
-        $keluar->create($request->all());
+        $SuratKeluar = new SuratKeluar();
+        $SuratKeluar->AlamatPenerima=$request->AlamatPenerima;
+        $SuratKeluar->Tanggal=$request->Tanggal;
+        $SuratKeluar->NomorSurat=$request->NomorSurat;
+        $SuratKeluar->Perihal=$request->Perihal;
+
+        if($request->hasFile('image')){
+            $request->file('image')->move('lte/dist/images/', $request->file('image')->getClientOriginalName());
+            $SuratKeluar->Foto = $request->file('image')->getClientOriginalName();
+        }
+        $SuratKeluar->save();
+
         return redirect('/suratkeluar');
     }
 
@@ -67,5 +67,17 @@ class SuratKeluarController extends Controller
         $kel = \App\SuratKeluar::find($id);
         $kel->delete($kel);
         return redirect('suratkeluar');
+    }
+    public function carikel(Request $request)
+    {
+        $carikel = $request->input('carikel');
+
+        $keluar = DB::table('suratkeluar')->select()
+        ->where('AlamatPenerima', 'LIKE', '%'.$carikel.'%')
+        ->orwhere('NomorSurat', 'LIKE', '%'.$carikel.'%')
+        ->orwhere('Perihal', 'LIKE', '%'.$carikel.'%')
+        ->get();
+        // dd($keluar);
+        return view('admin/suratkeluar', compact('keluar'));
     }
 }

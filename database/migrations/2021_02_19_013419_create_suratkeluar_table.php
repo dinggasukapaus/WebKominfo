@@ -19,6 +19,7 @@ class CreateSuratkeluarTable extends Migration
             $table->string('AlamatPenerima');
             $table->string('NomorSurat');
             $table->string('Perihal');
+            $table->string('Foto');
             $table->timestamps();
         });
     }

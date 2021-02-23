@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <input type="date" class="form-control input-sm" id="to" name="to" required>
             </div>
             <div class="col-sm-2">
-              <button type="submit" class="btn" name="search" title="Search"><img src="https://img.icons8.com/ios-glyphs/30/000000/search.png"/></button>
+              <button type="submit" class="btn" name="search" title="Search caari"><img src="https://img.icons8.com/ios-glyphs/30/000000/search.png"/></button>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </button>
               </div>
             </div>
-          </form>
+        </form>
         @yield('content')
         <table class="table">
             <thead class="thead-dark">
@@ -99,6 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <th scope="col">Tanggal</th>
                 <th scope="col">Nomor Surat</th>
                 <th scope="col">Perihal</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -110,6 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{$kel->Tanggal}}</td>
                 <td>{{$kel->NomorSurat}}</td>
                 <td>{{$kel->Perihal}}</td>
+                <td><img src="{{asset('lte/dist/images')}}/{{$kel->Foto}}" class="img-thumbnail" width="150"></td>
                 <td>
                   <a href="{{route ('keluaredit',[$kel->id])}}">
                     <img src="https://img.icons8.com/fluent-systems-filled/24/000000/edit-property.png">
@@ -121,6 +123,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               @endforeach
             </tbody>
           </table>
+
+          {{-- ! jadi pas request (seach ) data ."links()" dak kepanggil --}}
+          {{-- {{$keluar->links()}} --}}
+          
+
+
         <!-- /.row -->
       </div>
     </div>

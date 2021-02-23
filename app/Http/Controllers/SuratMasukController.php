@@ -15,7 +15,8 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $masuk=SuratMasuk::all();
+
+        $masuk=SuratMasuk::paginate(2);
         return view('admin/suratmasuk', compact('masuk'));
     }
     public function cari(Request $request)
@@ -26,6 +27,7 @@ class SuratMasukController extends Controller
             ->where('AlamatPengirim', 'LIKE', '%'.$cari.'%')
             ->orwhere('NomorSurat', 'LIKE', '%'.$cari.'%')
             ->orwhere('Perihal', 'LIKE', '%'.$cari.'%')
+            // ->orwhere('Foto', 'LIKE', '%'.$cari.'%')
             ->get();
 
         return view('admin/suratmasuk', compact('masuk'));
@@ -51,8 +53,17 @@ class SuratMasukController extends Controller
     {
         //
         // \App\SuratMasuk::create($request->all());
-        $masuk=new SuratMasuk;
-        $masuk->create($request->all());
+        $SuratMasuk = new SuratMasuk;
+        $SuratMasuk->AlamatPengirim=$request->AlamatPengirim;
+        $SuratMasuk->NomorSurat=$request->NomorSurat;
+        $SuratMasuk->Perihal=$request->Perihal;
+        
+        if($request->hasFile('image')){
+            $request->file('image')->move('lte/dist/images/', $request->file('image')->getClientOriginalName());
+            $SuratMasuk->Foto = $request->file('image')->getClientOriginalName();
+        }
+        $SuratMasuk->save();
+
         return redirect('/suratmasuk');
     }
 
@@ -101,4 +112,11 @@ class SuratMasukController extends Controller
         $item->delete($item);
         return redirect('suratmasuk');
     }
+    // public function getImages(){
+    //     if(!$this->Foto){
+    //         return asset('lte/dist/images/NF.png');
+    //     }
+    
+    //     return asset('lte/dist/images/'.$this->Foto);
+    // }
 }

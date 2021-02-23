@@ -99,6 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <th scope="col">Tanggal</th>
                 <th scope="col">Nomor Surat</th>
                 <th scope="col">Perihal</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -110,6 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->NomorSurat}}</td>
                 <td class="w-25">{{$item->Perihal}}</td>
+                <td><img src="{{asset('lte/dist/images')}}/{{$item->Foto}}" class="img-thumbnail" width="150"></td>
                 <td>
                   <a href="{{route ('masukedit',[$item->id])}}">
                     <img src="https://img.icons8.com/fluent-systems-filled/24/000000/edit-property.png">
@@ -121,6 +123,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               @endforeach
             </tbody>
           </table>
+
+          {{-- {{$masuk->links()}} --}}
         <!-- /.row -->
       </div>
     </div>
