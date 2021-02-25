@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>AdminLTE 3 | Starter</title>
+  <title>Edit Surat Masuk| Starter</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('lte/plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -77,6 +77,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div> 
                         <div class="form-group">
                           <label>Upload Foto</label>
+                          <input type="text" name="oldimg" class="d-none" value="{{$item->Foto}}">
+                          <img src="{{$item->getImages()}}" class="w-25">
                           <input type="file" name="image" id="image" required value="{{$item->Foto}}">
                       </div>             
                     </div>

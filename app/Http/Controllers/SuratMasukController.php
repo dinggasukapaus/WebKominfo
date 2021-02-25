@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use File;
 
 class SuratMasukController extends Controller
 {
@@ -16,7 +17,8 @@ class SuratMasukController extends Controller
     public function index()
     {
 
-        $masuk=SuratMasuk::paginate(2);
+        // $masuk=SuratMasuk::paginate(1);
+        $masuk=DB::table('SuratMasuk')  ->paginate(2);
         return view('admin/suratmasuk', compact('masuk'));
     }
     public function cari(Request $request)
@@ -28,7 +30,7 @@ class SuratMasukController extends Controller
             ->orwhere('NomorSurat', 'LIKE', '%'.$cari.'%')
             ->orwhere('Perihal', 'LIKE', '%'.$cari.'%')
             // ->orwhere('Foto', 'LIKE', '%'.$cari.'%')
-            ->get();
+            ->paginate(2);
 
         return view('admin/suratmasuk', compact('masuk'));
     }
@@ -95,22 +97,37 @@ class SuratMasukController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $item = \App\SuratMasuk::find($id);
-        $item->update($request->all());
+        $SuratMasuk = \App\SuratMasuk::find($id);
+        // $SuratMasuk = new SuratMasuk;
+        $SuratMasuk->AlamatPengirim=$request->AlamatPengirim;
+        $SuratMasuk->NomorSurat=$request->NomorSurat;
+        $SuratMasuk->Perihal=$request->Perihal;
+        
+        //delete old file masih eror hapus old file buat replace imagesnya ini
+        // SuratMasuk::delete('lte/dist/images/',$request->file('image'));
+
+        //upload new file
+        if($request->hasFile('image')){
+            $request->file('image')->move('lte/dist/images/', $request->file('image')->getClientOriginalName());
+            $SuratMasuk->Foto = $request->file('image')->getClientOriginalName();
+            if($request->oldimg != 'default.png'){
+                File::delete('lte/dist/images/'.$request->oldimg);
+            }
+        }
+        $SuratMasuk->save();
         return redirect('/suratmasuk');
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
-        $item = \App\SuratMasuk::find($id);
-        $item->delete($item);
-        return redirect('suratmasuk');
+        // $item = \App\SuratMasuk::find($id);
+        // $item->delete($item);
+        // return redirect('suratmasuk');
+
+        if($item->Foto != 'default.png'){
+            File::delete('lte/dist/images/'.$item->Foto);
+        }
     }
     // public function getImages(){
     //     if(!$this->Foto){

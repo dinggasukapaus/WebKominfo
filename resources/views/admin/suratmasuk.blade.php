@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://st.icons8.com/tmp-web-fonts/71/a0/7798a94b81c56ae8aa852e8b0671a06d6c373803/styles.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
+ <link rel="stylesheet" href="{{ asset('lte/dist/dataTables/datatables.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -52,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container">
         <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="form-group row" method="POST" action="{{route('date')}}">
+            <div class="form-group row" method="POST" action="{{route('date')}}"  enctype="multipart/form-data">
               <label for="date" class="col-form-labe col-sm-2">Tanggal Awal</label>
               <div class="col-sm-3">
                 <input type="date" class="form-control input-sm" id="from" name="from" required>
@@ -91,7 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
           </form>
         @yield('content')
-        <table class="table">
+        <table class="table" id="datatables">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">No</th>
@@ -123,12 +124,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               @endforeach
             </tbody>
           </table>
-
-          {{-- {{$masuk->links()}} --}}
+            {{ $masuk->links() }} 
+      
         <!-- /.row -->
       </div>
     </div>
-    <!-- /.content -->
+    <!-- /.content --> 
   </div>
   <!-- /.content-wrapper -->
 
@@ -141,9 +142,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery -->
 <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('lte/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('lte/dist/dataTables/datatables.min.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function()(
+$('#datatables').DataTable();
+
+</script>
 </body>
 </html>

@@ -9,12 +9,6 @@ class SuratMasuk extends Model
     //
     protected $table="suratmasuk";
     protected $guarded=['id'];
-    protected $fillable = [
-        'AlamatPengirim',
-        'NomorSurat',
-        'Perihal',
-        'Foto',
-    ];
 
     public function getImages(){
         if(!$this->Foto){

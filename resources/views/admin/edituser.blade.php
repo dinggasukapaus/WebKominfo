@@ -63,7 +63,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <form action="{{route('userupdate',['id'=> $user->id])}}" method="post">
                 @csrf
                     <div class="post-preview">
-                        <div class="form-group">
+                      <div class="form-group">
+                        <label for="name">{{ __('Username') }}</label>
+
+                        <div class="col-md-12">
+                            <input id="name" required value="{{$user->name}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">{{ __('Email') }}</label>
+
+                        <div class="col-md-12">
+                            <input id="email" required value="{{$user->email}}" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">{{ __('Password') }}</label>
+
+                        <div class="col-md-12">
+                            <input id="password" required value="{{$user->password}}" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                        <div class="col-md-12">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                    </div>
+                        {{-- <div class="form-group">
                             <label>Username</label>
                             <input type="text" class="form-control" name="name" required value="{{$user->name}}">
                         </div>
@@ -74,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" required value="{{$user->password}}">
-                        </div>            
+                        </div>             --}}
                     </div>
                     <div class="clearfix">
                       <button type="submit" class="btn btn-primary float-right ml-2">Simpan</button>
