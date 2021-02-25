@@ -20,7 +20,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  
+
 <!-- Navbar -->
 @include('admin/header')
 <!-- /.navbar -->
@@ -125,8 +125,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </table>
 
           {{-- ! jadi pas request (seach ) data ."links()" dak kepanggil --}}
-          {{-- {{$keluar->links()}} --}}
-          
+          {{$keluar->links()}}
+
 
 
         <!-- /.row -->

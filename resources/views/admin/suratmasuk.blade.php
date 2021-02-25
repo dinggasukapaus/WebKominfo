@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  
+
 <!-- Navbar -->
 @include('admin/header')
 <!-- /.navbar -->
@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content" >
       <div class="container-fluid">
         <a href="{{route('masuk')}}"><div type="button" class="btn btn-success float-right" style="margin-bottom:15px;">Tambah Data</div></a>
-        <a href="{{route('createmasuk')}}"><div type="button" class="btn btn-primary float-right" style="margin-bottom:15px; margin-right:15px;"> 
+        <a href="{{route('createmasuk')}}"><div type="button" class="btn btn-primary float-right" style="margin-bottom:15px; margin-right:15px;">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         width="20" height="20"
         viewBox="0 0 150 150"
@@ -124,12 +124,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               @endforeach
             </tbody>
           </table>
-            {{ $masuk->links() }} 
-      
+            {{ $masuk->links() }}
+
         <!-- /.row -->
       </div>
     </div>
-    <!-- /.content --> 
+    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 

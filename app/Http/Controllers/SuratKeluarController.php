@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class SuratKeluarController extends Controller
 {
-    
+
     public function index()
     {
         // pagination
@@ -22,7 +22,7 @@ class SuratKeluarController extends Controller
         //
         return view('admin/keluar');
     }
-    
+
     public function store(Request $request)
     {
         //
@@ -76,7 +76,8 @@ class SuratKeluarController extends Controller
         ->where('AlamatPenerima', 'LIKE', '%'.$carikel.'%')
         ->orwhere('NomorSurat', 'LIKE', '%'.$carikel.'%')
         ->orwhere('Perihal', 'LIKE', '%'.$carikel.'%')
-        ->get();
+        // ->get();
+        ->paginate(2);
         // dd($keluar);
         return view('admin/suratkeluar', compact('keluar'));
     }
